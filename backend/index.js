@@ -9,6 +9,7 @@ import { connectToDB } from "./config/dbConfig.js";
 import { cloudinaryConfig } from "./config/cloudinaryConfig.js";
 import fileUpload from "express-fileupload";
 import userRouter from "./routes/user.js"
+import blogRouter from "./routes/blog.js"
 
 
 
@@ -28,6 +29,7 @@ app.use(express.urlencoded({extended : true}))
 
 
 app.use("/api/v1/user",userRouter)
+app.use("/api/v1/blog",blogRouter)
 
 connectToDB();
 cloudinaryConfig().then(()=>console.log("Cloudinary Connected Successfully"));

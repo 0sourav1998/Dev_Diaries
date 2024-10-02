@@ -13,6 +13,10 @@ const blogSchema = new mongoose.Schema({
         type : String ,
         required : true
     },
+    category : {
+        type : String ,
+        required : true
+    },
     titleTwo : {
         type : String 
     },
@@ -41,18 +45,15 @@ const blogSchema = new mongoose.Schema({
     imageFour : {
         type : String 
     },
-    createdBy : {
+    authorId : {
         type : mongoose.Schema.Types.ObjectId,
         ref : "User"
-    },
-    authorName : {
-        type : String,
-        required : true
-    }, 
-    authorImage : {
-        type : String,
-        required : true
+    } ,
+    published : {
+        type : Boolean ,
+        default : false
     }
 })
 
-export const Blog = mongoose.model("Blog",blogSchema);
+const Blog = mongoose.model("Blog",blogSchema);
+export default Blog ;
