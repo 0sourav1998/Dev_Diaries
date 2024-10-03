@@ -58,6 +58,7 @@ export const login = async (req, res) => {
       });
     }
     const user = await User.findOne({ email });
+    console.log(user)
     if (!user) {
       return res.status(400).json({
         success: false,
@@ -78,6 +79,7 @@ export const login = async (req, res) => {
         expires: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000), 
         httpOnly: true,
       };
+
       return res.cookie("token", token, options).json({
         success: true,
         message: "User Logged In Successfully",
