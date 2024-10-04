@@ -21,7 +21,7 @@ export const Sidebar = () => {
         return <Navigate to="/" />
     }
   return (
-    <div className='h-[70%] bg-gray-800 rounded-md fixed'>
+    <div className='h-[70%] w-[15%] bg-gray-800 rounded-md fixed'>
         <div className='flex flex-col gap-2 items-center p-4'>
             <img src={user?.profilePicture} alt={user?.name} className='h-12 w-12 rounded-full'/>
             <h1 className='text-gray-300 font-bold'>{user?.name}</h1>

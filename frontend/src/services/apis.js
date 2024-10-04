@@ -10,5 +10,7 @@ export const blogEndPoints = {
     FETCH_ALL_BLOGS : `${BASE_URL}/api/v1/blog/all`,
     GET_MY_BLOGS : `${BASE_URL}/api/v1/blog/myBlogs`,
     CREATE_BLOG : `${BASE_URL}/api/v1/blog/post`,
-    FETCH_LATEST_BLOGS : `${BASE_URL}/api/v1/blog/latestBlogs`
+    FETCH_LATEST_BLOGS : `${BASE_URL}/api/v1/blog/latestBlogs`,
+    UPDATE_BLOG : `${BASE_URL}/api/v1/blog/update` ,
+    DELETE_BLOG : `${BASE_URL}/api/v1/blog//delete`
 }

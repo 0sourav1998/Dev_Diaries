@@ -1,11 +1,14 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import logo from "../assets/RS_DummyImage.jpg";
-import { useLocation, useNavigate } from "react-router-dom";
-import toast  from 'react-hot-toast';
-import { createBlog } from "../services/operations/blogs";
-import { useSelector } from "react-redux";
+import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { setFetchBlogById } from "../redux/slice/blog";
+import toast from "react-hot-toast";
+import { updateBlog } from "../services/operations/blogs";
 
-export const CreateBlog = () => {
+export const UpdateBlog = () => {
+  const { id } = useParams();
   const imageRef = useRef();
   const imageTwoRef = useRef();
   const imageThreeRef = useRef();
@@ -13,14 +16,14 @@ export const CreateBlog = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const { token } = useSelector((state) => state.user);
-
   const [imagePreview, setImagePreview] = useState("");
   const [imagePreviewTwo, setImagePreviewTwo] = useState("");
   const [imagePreviewThree, setImagePreviewThree] = useState("");
   const [imagePreviewFour, setImagePreviewFour] = useState("");
   const [loading, setLoading] = useState(false);
-
+  const { token } = useSelector((state) => state.user);
+  const { fetchBlogById } = useSelector((state) => state.blog);
+  const dispatch = useDispatch();
 
   const [input, setInput] = useState({
     category: "",
@@ -74,9 +77,67 @@ export const CreateBlog = () => {
     }
   };
 
+  const fetchBlog = async () => {
+    try {
+      console.log("ID", id);
+      const response = await axios.get(
+        `http://localhost:4000/api/v1/blog/singleBlog/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      if (response?.data?.success) {
+        dispatch(setFetchBlogById(response?.data?.blog));
+        setInput({
+          category: fetchBlogById?.category,
+
+          title: fetchBlogById?.title,
+          description: fetchBlogById?.description,
+          image: fetchBlogById?.image,
+
+          titleTwo: fetchBlogById.titleTwo ? fetchBlogById?.titleTwo : "",
+          descriptionTwo: fetchBlogById.descriptionTwo
+            ? fetchBlogById?.descriptionTwo
+            : "",
+          imageTwo: fetchBlogById?.imageTwo ? fetchBlogById?.imageTwo : "",
+
+          titleThree: fetchBlogById.titleThree ? fetchBlogById?.titleThree : "",
+          descriptionThree: fetchBlogById.descriptionThree
+            ? fetchBlogById?.descriptionThree
+            : "",
+          imageThree: fetchBlogById?.imageThree
+            ? fetchBlogById?.imageThree
+            : "",
+
+          titleFour: fetchBlogById.titleFour ? fetchBlogById?.titleFour : "",
+          descriptionFour: fetchBlogById.descriptionFour
+            ? fetchBlogById?.descriptionFour
+            : "",
+          imageFour: fetchBlogById?.imageFour ? fetchBlogById?.imageFour : "",
+        });
+        setImagePreview(fetchBlogById?.image);
+        fetchBlogById.imageTwo && setImagePreviewTwo(fetchBlogById?.imageTwo);
+        fetchBlogById.imageThree &&
+          setImagePreviewThree(fetchBlogById?.imageThree);
+        fetchBlogById.imageFour &&
+          setImagePreviewFour(fetchBlogById?.imageFour);
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  useEffect(() => {
+    fetchBlog();
+  }, [id,fetchBlogById]);
+
   const handleSubmit = async () => {
     try {
       const formData = new FormData();
+      console.log("ID", id);
+      formData.append("id", id);
       formData.append("category", input.category);
       formData.append("published", true);
       formData.append("title", input.title);
@@ -96,10 +157,10 @@ export const CreateBlog = () => {
       formData.append("imageFour", input.imageFour);
 
       setLoading(true);
-      const res = await createBlog(formData, token);
+      const res = await updateBlog(formData, token);
       if (res?.data?.success) {
-        toast.success("Blog Created Successfully");
-        navigate("/")
+        toast.success("Blog Updated Successfully");
+        navigate("/");
       }
     } catch (error) {
       toast.error(error.message);
@@ -108,24 +169,14 @@ export const CreateBlog = () => {
     }
   };
 
-  // Reset image previews when location.pathname changes
-  useEffect(() => {
-    setImagePreview(null);
-    setImagePreviewTwo(null);
-    setImagePreviewThree(null);
-    setImagePreviewFour(null);
-  }, [location.pathname]);
-
   return (
     <div className="w-full flex flex-row gap-12 mb-10">
       <div className="w-[50%]">
         <div>
-          <h1 className="text-gray-400 text-2xl mb-4">
-            These Fields Are Mandatory
-          </h1>
           <select
             className="bg-gray-800 text-gray-600 p-2 border-b"
             onChange={(e) => setInput({ ...input, category: e.target.value })}
+            value={input?.category}
           >
             <option value="">Select A Category</option>
             <option value="Health & Food">Health & Food</option>
@@ -135,7 +186,6 @@ export const CreateBlog = () => {
             <option value="Business">Business</option>
             <option value="Travel">Travel</option>
             <option value="Sports">Sports</option>
-            <option value="Others">Others</option>
           </select>
         </div>
         <div className="w-full flex flex-col gap-2 mt-4">
@@ -182,14 +232,12 @@ export const CreateBlog = () => {
           onClick={handleSubmit}
           className="w-full bg-blue-500 text-gray-300 p-3 mt-6"
         >
-          {loading ? "Loading..." : "Create Blog"}
+          {loading ? "Loading..." : "Update Blog"}
         </button>
       </div>
 
       {/* Not Mandatory Fields */}
       <div className="w-[50%]">
-        <h1 className="text-gray-400 text-2xl mb-4">Optional Fields</h1>
-
         {/* Image Two */}
         <div className="mb-4">
           <label className="text-gray-400 text-lg">Title Two</label>
@@ -214,7 +262,7 @@ export const CreateBlog = () => {
             onChange={handleFileTwoChange}
           />
           {imagePreviewTwo && (
-            <img src={imagePreviewTwo} className="h-12 w-24" />
+            <img src={imagePreviewTwo} className="h-28 w-full" />
           )}
           <button
             onClick={() => imageTwoRef.current.click()}
@@ -250,7 +298,7 @@ export const CreateBlog = () => {
             onChange={handleFileThreeChange}
           />
           {imagePreviewThree && (
-            <img src={imagePreviewThree} className="h-12 w-24" />
+            <img src={imagePreviewThree} className="h-28 w-full" />
           )}
           <button
             onClick={() => imageThreeRef.current.click()}
@@ -284,7 +332,7 @@ export const CreateBlog = () => {
             onChange={handleFileFourChange}
           />
           {imagePreviewFour && (
-            <img src={imagePreviewFour} className="h-12 w-24" />
+            <img src={imagePreviewFour} className="h-28 w-full" />
           )}
           <button
             onClick={() => imageFourRef.current.click()}

@@ -13,6 +13,7 @@ import { MyBlogs } from "./components/MyBlogs";
 import { CreateBlog } from "./components/CreateBlog";
 import { Chart } from "./components/Chart";
 import { MyProfile } from "./components/MyProfile";
+import { UpdateBlog } from "./components/UpdateBlog";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
           <Route path="/dashboard" element={<MyDashboard />}>
             <Route path="myBlogs" element={<MyBlogs />} />
             <Route path="create" element={<CreateBlog />} />
+            <Route path="update/:id" element={<UpdateBlog/>}/>
             <Route path="chart" element={<Chart />} />
             <Route path="me" element={<MyProfile />} />
           </Route>

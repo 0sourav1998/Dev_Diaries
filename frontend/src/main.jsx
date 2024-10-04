@@ -6,16 +6,30 @@ import { configureStore } from "@reduxjs/toolkit";
 import { rootReducer } from "./redux/redux/index.js";
 import { Provider } from "react-redux";
 import { Toaster } from 'react-hot-toast';
+import storage from "redux-persist/lib/storage";
+import { persistReducer, persistStore } from "redux-persist";
+import { PersistGate } from "redux-persist/integration/react";
+
+const persistConfig = {
+  key: "root",
+  storage,
+};
+
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const store = configureStore({
-  reducer: rootReducer,
+  reducer: persistedReducer,
 });
+
+const persistor = persistStore(store);
 
 createRoot(document.getElementById("root")).render(
   <Provider store={store}>
-    <BrowserRouter>
-      <App />
-      <Toaster />
-    </BrowserRouter>
+    <PersistGate loading={null} persistor={persistor}>
+      <BrowserRouter>
+        <App />
+        <Toaster />
+      </BrowserRouter>
+    </PersistGate>
   </Provider>
 );

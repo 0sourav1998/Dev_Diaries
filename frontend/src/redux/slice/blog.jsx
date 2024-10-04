@@ -4,7 +4,8 @@ const initialState = {
   allBlogs : [] ,
   singleBlog : null ,
   myBlogs :[] ,
-  latestBlogs : []
+  latestBlogs : [] ,
+  fetchBlogById : null
 };
 
 const blogSlice = createSlice({
@@ -22,9 +23,12 @@ const blogSlice = createSlice({
     },
     setLatestBlogs : (state,action)=>{
       state.latestBlogs = action.payload
+    },
+    setFetchBlogById : (state,action)=>{
+      state.fetchBlogById = action.payload
     }
   },
 });
 
-export const { setAllBlogs , setSingleBlog , setMyBlogs , setLatestBlogs} = blogSlice.actions;
+export const { setAllBlogs , setSingleBlog , setMyBlogs , setLatestBlogs , setFetchBlogById} = blogSlice.actions;
 export default blogSlice.reducer;

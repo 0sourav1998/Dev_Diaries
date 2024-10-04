@@ -97,7 +97,7 @@ export const createBlog = async (req, res) => {
 export const deleteBlog = async (req, res) => {
   try {
     const id = req.user;
-    const blogId = req.params.id;
+    const blogId = req.body.id;
     if (!id || !blogId) {
       return res.status(400).json({
         success: false,
@@ -117,6 +117,7 @@ export const deleteBlog = async (req, res) => {
       return res.status(200).json({
         success: true,
         message: "Blog Deleted",
+        deletedBlog : blog
       });
     } else {
       return res.status(400).json({
@@ -206,9 +207,7 @@ export const getMyBlogs = async (req, res) => {
 
 export const updateBlog = async (req, res) => {
   try {
-    const blogId = req.params.id;
-    const blog = await Blog.findById(blogId);
-    let newUpdatedBlog = ({
+    let newUpdatedBlog = {
       title: req.body.title,
       description: req.body.description,
       titleTwo: req.body.titleTwo,
@@ -219,7 +218,8 @@ export const updateBlog = async (req, res) => {
       descriptionFour: req.body.descriptionFour,
       category: req.body.category,
       published: req.body.published,
-    } = req.body);
+    } = req.body;
+    const blog = await Blog.findById(req.body.id);
     if (req.files) {
       const allowedFormats = [
         "image/jpeg",
