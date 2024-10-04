@@ -1,11 +1,12 @@
 import React, { useState, useRef } from "react";
 import { signup } from "../services/operations/user";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export const Signup = () => {
   const imageRef = useRef();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const [imagePreview, setImagePreview] = useState("");
   const [input, setInput] = useState({
     name: "",
     email: "",
@@ -15,6 +16,15 @@ export const Signup = () => {
     phone: "",
     image: null,
   });
+
+  const handleFileChange = async (e) => {
+    const image = e.target.files[0];
+    if (image) {
+      setInput({ ...input, image: image });
+      const imageURL = URL.createObjectURL(image);
+      setImagePreview(imageURL);
+    }
+  };
 
   const handleSubmit = async (e) => {
     try {
@@ -38,7 +48,10 @@ export const Signup = () => {
 
   return (
     <div className="w-full h-full flex items-center justify-center bg-[#181a2a]">
-      <form onSubmit={handleSubmit} className="w-fit flex flex-col p-6 mt-3 bg-gray-900 rounded-lg shadow-lg">
+      <form
+        onSubmit={handleSubmit}
+        className="w-1/3 flex flex-col p-6 mt-3 bg-gray-900 rounded-lg shadow-lg"
+      >
         <h1 className="font-bold text-2xl text-gray-100 text-center mb-4">
           Sign Up
         </h1>
@@ -64,7 +77,7 @@ export const Signup = () => {
             placeholder="Enter Your Password..."
           />
           <input
-            type="tel"
+            type="number"
             value={input.phone}
             onChange={(e) => setInput({ ...input, phone: e.target.value })}
             className="rounded-md w-full bg-gray-800 outline-none border-b-2 border-gray-600 text-gray-200 p-2 transition duration-300 focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
@@ -76,29 +89,37 @@ export const Signup = () => {
             className="rounded-md w-full bg-gray-800 outline-none border-b-2 border-gray-600 text-gray-200 p-2 transition duration-300 focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
             placeholder="Enter Your Education..."
           />
-          <div className="flex justify-between gap-4 mb-4">
+          <div className="flex items-center justify-between gap-4 mb-2">
+            {imagePreview && (
+              <img
+                src={imagePreview}
+                alt="Image Preview"
+                className="w-20 h-20 object-cover rounded-full shadow-md mx-auto mb-4"
+              />
+            )}
             <input
               ref={imageRef}
               type="file"
               className="hidden"
-              onChange={(e) => setInput({ ...input, image: e.target.files[0] })}
+              onChange={handleFileChange}
             />
+
             <button
               onClick={() => imageRef.current.click()}
               type="button"
-              className="w-full p-2 rounded-md bg-pink-600 text-white shadow hover:bg-pink-500 transition duration-200"
+              className="p-2 w-full rounded-md bg-pink-600 text-white shadow hover:bg-pink-500 transition duration-200"
             >
               Select Your Photo
             </button>
-            <select
-              onChange={(e) => setInput({ ...input, role: e.target.value })}
-              className="rounded-md w-full bg-gray-800 outline-none border-b-2 border-gray-600 text-gray-200 p-2 transition duration-300 focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
-            >
-              <option value="">Select Your Role</option>
-              <option value="Author">Author</option>
-              <option value="Reader">Reader</option>
-            </select>
           </div>
+          <select
+            onChange={(e) => setInput({ ...input, role: e.target.value })}
+            className="rounded-md w-full mb-2 bg-gray-800 outline-none border-b-2 border-gray-600 text-gray-200 p-2 transition duration-300 focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
+          >
+            <option value="">Select Your Role</option>
+            <option value="Author">Author</option>
+            <option value="Reader">Reader</option>
+          </select>
         </div>
         <button
           type="submit"
@@ -106,6 +127,7 @@ export const Signup = () => {
         >
           {loading ? "Loading..." : "Submit"}
         </button>
+        <p className="mt-2 text-gray-300 text-xs text-center">Already have an account ? <Link to="/login" className="text-green-900 text-sm">Login Now</Link></p>
       </form>
     </div>
   );

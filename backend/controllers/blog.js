@@ -40,6 +40,7 @@ export const createBlog = async (req, res) => {
       titleFour,
       descriptionFour,
     } = req.body;
+    console.log(published)
     const authorId = req.user;
     if (!title || !description) {
       return res.status(400).json({
@@ -134,7 +135,7 @@ export const deleteBlog = async (req, res) => {
 
 export const allBlogs = async (req, res) => {
   try {
-    const blogs = await Blog.find({ published: true });
+    const blogs = await Blog.find({ published: true }).populate("authorId");
     if (blogs.length === 0) {
       return res.status(404).json({
         success: false,
@@ -158,7 +159,7 @@ export const allBlogs = async (req, res) => {
 export const getBlogById = async (req, res) => {
   try {
     const id = req.params.id;
-    const blog = await Blog.findById(id);
+    const blog = await Blog.findById(id).populate("authorId");
     if (!blog) {
       return res.status(400).json({
         success: false,
@@ -195,6 +196,7 @@ export const getMyBlogs = async (req, res) => {
       myBlogs,
     });
   } catch (error) {
+    console.log(error.message)
     return res.status(400).json({
       success: false,
       message: "Something Went Wrong While Fetching My Blogs",
@@ -334,3 +336,20 @@ export const updateBlog = async (req, res) => {
     });
   }
 };
+
+export const latestBlogs = async(req,res)=>{
+  try {
+    const Blogs = await Blog.find({published : true}).populate("authorId").sort({ createdAt : -1 });
+    return res.status(200).json({
+      success : true ,
+      message : "Latest Blogs Fetched",
+      Blogs
+    })
+  } catch (error) {
+    console.log(error.message);
+    return res.status(400).json({
+      success: false,
+      message: "Something Went Wrong While Fetching Latest Blogs",
+    });
+  }
+}

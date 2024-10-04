@@ -83,7 +83,8 @@ export const login = async (req, res) => {
       return res.cookie("token", token, options).json({
         success: true,
         message: "User Logged In Successfully",
-        token
+        token ,
+        user
       });
     } else {
       return res.status(400).json({

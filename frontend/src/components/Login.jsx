@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { login } from "../services/operations/user";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 export const Login = () => {
@@ -56,6 +56,7 @@ export const Login = () => {
         >
           {loading ? "Loading..." : "Login"}
         </button>
+        <p className="mt-2 text-gray-300 text-xs text-center">Don't have an account ? <Link to="/signup" className="text-green-900 text-sm">Signup Now</Link></p>
       </div>
     </div>
   );
