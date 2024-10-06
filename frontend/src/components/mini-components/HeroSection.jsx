@@ -17,8 +17,8 @@ export const HeroSection = () => {
                 className="h-96 w-full object-cover rounded-t-lg hover:scale-105 transition-transform duration-300"
                 alt={blog?.title}
               />
-              <div className="absolute bottom-8 px-4">
-                <h1 className="text-gray-100 text-3xl font-semibold mb-2">
+              <div className="absolute bottom-8 sm:px-4 px-1">
+                <h1 className="text-gray-100 lg:text-3xl text-lg font-semibold mb-2">
                   {blog?.title}
                 </h1>
                 <div className="flex items-center gap-4 mt-4">

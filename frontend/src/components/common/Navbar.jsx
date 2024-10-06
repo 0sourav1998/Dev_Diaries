@@ -21,13 +21,13 @@ export const Navbar = () => {
       <div className="w-8/12 mx-auto flex justify-between items-center">
         {/* Logo */}
         <div>
-          <h1 className="text-white font-bold text-3xl cursor-pointer hover:text-gray-200 transition-all duration-300">
+          <h1 className="text-white sm:font-bold font-semibold text-xl sm:text-3xl cursor-pointer hover:text-gray-200 transition-all duration-300">
             The Dev_<span className="text-yellow-400">Diaries</span>
           </h1>
         </div>
         
         {/* Links */}
-        <div className="flex flex-row gap-8 text-white text-lg font-medium">
+        <div className="flex flex-row gap-6 text-white text-lg font-medium hidden md:flex">
           <Link to="/">
             <span className="hover:text-yellow-400 transition-all duration-300">
               Home
@@ -51,7 +51,7 @@ export const Navbar = () => {
         </div>
         
         {/* Buttons */}
-        <div className="flex flex-row gap-4">
+        <div className="flex flex-row gap-4 hidden sm:flex">
           {token ? (
             <button
               onClick={handleLogout}

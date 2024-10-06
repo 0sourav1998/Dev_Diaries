@@ -117,14 +117,14 @@ export const CreateBlog = () => {
   }, [location.pathname]);
 
   return (
-    <div className="w-full flex flex-row gap-12 mb-10">
-      <div className="w-[50%]">
+    <div className="w-full flex md:flex-row flex-col gap-12 mb-10">
+      <div className="md:w-[50%] w-full">
         <div>
-          <h1 className="text-gray-400 text-2xl mb-4">
+          <h1 className="text-gray-400 md:text-2xl text-sm mb-4">
             These Fields Are Mandatory
           </h1>
           <select
-            className="bg-gray-800 text-gray-600 p-2 border-b"
+            className="bg-gray-800 text-gray-600 md:p-2 p-1 border-b"
             onChange={(e) => setInput({ ...input, category: e.target.value })}
           >
             <option value="">Select A Category</option>
@@ -139,7 +139,7 @@ export const CreateBlog = () => {
           </select>
         </div>
         <div className="w-full flex flex-col gap-2 mt-4">
-          <label className="text-gray-400 text-xl">Title Of The Blog</label>
+          <label className="text-gray-400 md:text-xl text-sm">Title Of The Blog</label>
           <input
             value={input?.title}
             className="w-full p-2 bg-gray-600 text-gray-400"
@@ -147,7 +147,7 @@ export const CreateBlog = () => {
           />
         </div>
         <div className="w-full flex flex-col gap-2 mt-4">
-          <label className="text-gray-400 text-xl">
+          <label className="text-gray-400 md:text-xl text-sm">
             Description Of The Blog
           </label>
           <textarea
@@ -173,32 +173,32 @@ export const CreateBlog = () => {
           )}
           <button
             onClick={() => imageRef.current.click()}
-            className="w-[30%] bg-blue-600 rounded-md text-gray-300 p-3 mt-2"
+            className="md:w-[30%] w-full bg-blue-600 rounded-md text-gray-300 md:p-3 p-1  mt-2"
           >
             Choose A Image
           </button>
         </div>
         <button
           onClick={handleSubmit}
-          className="w-full bg-blue-500 text-gray-300 p-3 mt-6"
+          className="md:w-[30%] w-full bg-blue-500 text-gray-300 md:p-3 p-1 mt-6"
         >
           {loading ? "Loading..." : "Create Blog"}
         </button>
       </div>
 
       {/* Not Mandatory Fields */}
-      <div className="w-[50%]">
-        <h1 className="text-gray-400 text-2xl mb-4">Optional Fields</h1>
+      <div className="md:w-[50%] w-full">
+        <h1 className="text-gray-400 md:text-2xl text-sm mb-4">Optional Fields</h1>
 
         {/* Image Two */}
         <div className="mb-4">
-          <label className="text-gray-400 text-lg">Title Two</label>
+          <label className="text-gray-400 md:text-xl text-sm">Title Two</label>
           <input
             value={input.titleTwo}
             onChange={(e) => setInput({ ...input, titleTwo: e.target.value })}
             className="w-full p-1 bg-gray-600 text-gray-400"
           />
-          <label className="text-gray-400 text-lg mt-2">Description Two</label>
+          <label className="text-gray-400 md:text-xl text-sm">Description Two</label>
           <textarea
             value={input.descriptionTwo}
             onChange={(e) =>
@@ -226,13 +226,13 @@ export const CreateBlog = () => {
 
         {/* Image Three */}
         <div className="mb-4">
-          <label className="text-gray-400 text-lg">Title Three</label>
+          <label className="text-gray-400 md:text-lg text-sm">Title Three</label>
           <input
             value={input.titleThree}
             onChange={(e) => setInput({ ...input, titleThree: e.target.value })}
             className="w-full p-1 bg-gray-600 text-gray-400"
           />
-          <label className="text-gray-400 text-lg mt-2">
+          <label className="text-gray-400 md:text-xl text-sm">
             Description Three
           </label>
           <textarea
@@ -262,13 +262,13 @@ export const CreateBlog = () => {
 
         {/* Image Four */}
         <div className="mb-4">
-          <label className="text-gray-400 text-lg">Title Four</label>
+          <label className="text-gray-400 md:text-lg text-sm">Title Four</label>
           <input
             value={input.titleFour}
             onChange={(e) => setInput({ ...input, titleFour: e.target.value })}
             className="w-full p-1 bg-gray-600 text-gray-400"
           />
-          <label className="text-gray-400 text-lg mt-2">Description Four</label>
+          <label className="text-gray-400 md:text-xl text-sm">Description Four</label>
           <textarea
             value={input.descriptionFour}
             onChange={(e) =>

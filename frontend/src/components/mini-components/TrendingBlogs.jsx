@@ -40,7 +40,7 @@ export const TrendingBlogs = () => {
             <div key={blog._id} className="flex gap-4 relative">
               <Link to={`/blog/${blog._id}`}>
                 <img
-                  className="h-64 w-64 rounded-md opacity-80 hover:scale-105 hover:opacity-100 transition-transform duration-300"
+                  className="h-52 w-fit xl:h-64 xl:w-64 rounded-md opacity-80 hover:scale-105 hover:opacity-100 transition-transform duration-300"
                   src={blog?.image}
                   alt={blog?.title}
                 />

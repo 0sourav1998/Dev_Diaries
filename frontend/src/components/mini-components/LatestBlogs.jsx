@@ -26,20 +26,20 @@ export const LatestBlogs = () => {
       <h1 className="text-2xl font-bold text-gray-100 mb-6 w-full flex justify-start">
         Latest Blogs
       </h1>
-      <div className="w-full grid grid-cols-1 md:grid-cols-2">
+      <div className="w-full grid grid-cols-1 xl:grid-cols-2">
         {latestBlogs && latestBlogs.length > 0 ? (
           latestBlogs?.slice(0,4)?.map((blog) => (
             <Link key={blog._id} to={`/blog/${blog._id}`}>
-              <div className="text-gray-100 mr-4 mb-4">
-                <div className="bg-gray-950 flex gap-6 rounded-md p-4 shadow-xl hover:opacity-70 cursor-pointer hover:scale-105 transition-all duration-300">
+              <div className="text-gray-100 sm:mr-4 mb-4">
+                <div className="bg-gray-950 w-full flex lg:flex-row flex-col gap-6 rounded-md p-4 shadow-xl hover:opacity-70 cursor-pointer hover:scale-105 transition-all duration-300">
                   <img
-                    className="h-48 w-40 object-cover"
+                    className="h-48 lg:w-40 w-full object-fit"
                     src={blog?.image}
                     alt={blog.title}
                   />
                   <div className="flex flex-col gap-4">
                   <div className="w-fit bg-gray-700 text-blue-500 rounded-md px-3 py-1 font-bold">{blog?.category}</div>
-                    <h1 className="text-lg font-bold text-gray-300">
+                    <h1 className="text-lg  font-bold text-gray-300">
                       Title : {blog?.title}
                     </h1>
                     <p className="text-xs text-gray-300 font-semibold">

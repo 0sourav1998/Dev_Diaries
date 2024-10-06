@@ -50,7 +50,7 @@ export const Signup = () => {
     <div className="w-full h-full flex items-center justify-center bg-[#181a2a]">
       <form
         onSubmit={handleSubmit}
-        className="w-1/3 flex flex-col p-6 mt-3 bg-gray-900 rounded-lg shadow-lg"
+        className="lg:w-1/3 w-full sm:w-[80%] md:w-1/2 flex flex-col p-6 mt-3 bg-gray-900 rounded-lg shadow-lg"
       >
         <h1 className="font-bold text-2xl text-gray-100 text-center mb-4">
           Sign Up

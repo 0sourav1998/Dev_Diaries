@@ -17,7 +17,7 @@ export const Homepage = () => {
     fetchBlog();
   }, []);
   return (
-    <div className="w-9/12 mx-auto flex flex-col justify-between items-center">
+    <div className="sm:w-9/12 w-full mx-auto flex flex-col justify-between items-center">
       <HeroSection />
       <TrendingBlogs />
       <LatestBlogs />

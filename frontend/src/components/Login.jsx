@@ -26,7 +26,7 @@ export const Login = () => {
 
   return (
     <div className="h-full w-full flex justify-center items-center bg-[#181a2a]">
-      <div className="flex flex-col gap-4 w-1/4 p-8 bg-gray-900 rounded-lg shadow-lg">
+      <div className="flex flex-col gap-4 lg:w-1/3 w-full sm:w-[80%] md:w-1/2 p-8 bg-gray-900 rounded-lg shadow-lg">
         <h1 className="font-bold text-2xl text-gray-100 text-center mb-4">Login</h1>
         <input
           onChange={(e) => setInput({ ...input, email: e.target.value })}
