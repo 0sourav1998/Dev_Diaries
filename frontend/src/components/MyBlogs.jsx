@@ -35,7 +35,7 @@ export const MyBlogs = () => {
 
   return (
     <div className="w-full">
-      <h1 className="md:text-3xl text-xl font-extrabold mb-6 text-gray-100">My Blogs</h1>
+      <h1 className="md:text-3xl text-xl font-extrabold md:mb-6 mb-3 text-gray-100">My Blogs</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {myBlogs && myBlogs.length > 0 ? (
           myBlogs.map((blog) => (

@@ -1,8 +1,10 @@
 import React, { useState, useRef } from "react";
 import { signup } from "../services/operations/user";
 import { Link, useNavigate } from "react-router-dom";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 export const Signup = () => {
+  const [visible, setVisible] = useState(false);
   const imageRef = useRef();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
@@ -69,13 +71,28 @@ export const Signup = () => {
             className="rounded-md w-full bg-gray-800 outline-none border-b-2 border-gray-600 text-gray-200 p-2 transition duration-300 focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
             placeholder="Enter Your Email..."
           />
-          <input
-            onChange={(e) => setInput({ ...input, password: e.target.value })}
-            type="password"
-            value={input.password}
-            className="rounded-md w-full bg-gray-800 outline-none border-b-2 border-gray-600 text-gray-200 p-2 transition duration-300 focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
-            placeholder="Enter Your Password..."
-          />
+          <div className="relative">
+            <input
+              onChange={(e) => setInput({ ...input, password: e.target.value })}
+              type={visible ? "text" : "password"}
+              value={input.password}
+              className="rounded-md w-full bg-gray-800 outline-none border-b-2 border-gray-600 text-gray-200 p-2 transition duration-300 focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
+              placeholder="Enter Your Password..."
+            />
+            {visible && (
+              <FaEye
+                className="absolute top-2.5 right-4 text-white text-xl cursor-pointer"
+                onClick={() => setVisible(false)}
+              />
+            )}
+            {!visible && (
+              <FaEyeSlash
+                className="absolute top-2.5 right-4 text-white text-xl cursor-pointer"
+                onClick={() => setVisible(true)}
+              />
+            )}
+          </div>
+
           <input
             type="number"
             value={input.phone}
@@ -127,7 +144,12 @@ export const Signup = () => {
         >
           {loading ? "Loading..." : "Submit"}
         </button>
-        <p className="mt-2 text-gray-300 text-xs text-center">Already have an account ? <Link to="/login" className="text-green-900 text-sm">Login Now</Link></p>
+        <p className="mt-2 text-gray-300 text-xs text-center">
+          Already have an account ?{" "}
+          <Link to="/login" className="text-green-900 text-sm">
+            Login Now
+          </Link>
+        </p>
       </form>
     </div>
   );

@@ -37,7 +37,7 @@ export const SingleBlog = () => {
   }
 
   return (
-    <div className="w-11/12 md:w-9/12 mx-auto text-gray-300 flex flex-col gap-6 py-8">
+    <div className="w-11/12 md:w-9/12 mx-auto text-gray-300 flex flex-col gap-6 md:py-8 py-2">
       {/* Blog Category */}
       <div className="bg-gray-900 text-blue-500 px-4 py-2 w-fit rounded-md font-bold">
         {singleBlog?.category}

@@ -120,7 +120,7 @@ export const CreateBlog = () => {
     <div className="w-full flex md:flex-row flex-col gap-12 mb-10">
       <div className="md:w-[50%] w-full">
         <div>
-          <h1 className="text-gray-400 md:text-2xl text-sm mb-4">
+          <h1 className="text-gray-400 md:text-2xl text-sm mb-4 font-bold">
             These Fields Are Mandatory
           </h1>
           <select
@@ -173,14 +173,14 @@ export const CreateBlog = () => {
           )}
           <button
             onClick={() => imageRef.current.click()}
-            className="md:w-[30%] w-full bg-blue-600 rounded-md text-gray-300 md:p-3 p-1  mt-2"
+            className="w-full bg-blue-600 rounded-md text-gray-300 md:p-3 p-1  mt-2"
           >
             Choose A Image
           </button>
         </div>
         <button
           onClick={handleSubmit}
-          className="md:w-[30%] w-full bg-blue-500 text-gray-300 md:p-3 p-1 mt-6"
+          className="w-full bg-blue-500 text-gray-300 md:p-3 p-1 mt-6"
         >
           {loading ? "Loading..." : "Create Blog"}
         </button>
@@ -188,7 +188,7 @@ export const CreateBlog = () => {
 
       {/* Not Mandatory Fields */}
       <div className="md:w-[50%] w-full">
-        <h1 className="text-gray-400 md:text-2xl text-sm mb-4">Optional Fields</h1>
+        <h1 className="text-gray-400 md:text-2xl text-sm mb-4 font-bold">Optional Fields</h1>
 
         {/* Image Two */}
         <div className="mb-4">

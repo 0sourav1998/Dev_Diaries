@@ -7,17 +7,17 @@ export const HeroSection = () => {
   const { allBlogs } = useSelector((state) => state.blog);
 
   return (
-    <div className="grid gap-6 sm:grid-cols-2 grid-cols-1">
+    <div className="grid gap-6 sm:grid-cols-2 grid-cols-1 p-4">
       {allBlogs && allBlogs.length > 0 ? (
         allBlogs.map((blog) => (
           <Link key={blog._id} to={`/blog/${blog._id}`}>
-            <div className="flex relative flex-col  rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 cursor-pointer">
+            <div className="flex relative flex-col rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 cursor-pointer">
               <img
                 src={blog?.image}
                 className="h-96 w-full object-cover rounded-t-lg hover:scale-105 transition-transform duration-300"
                 alt={blog?.title}
               />
-              <div className="absolute bottom-8 sm:px-4 px-1">
+              <div className="absolute bottom-8 sm:px-4 px-2">
                 <h1 className="text-gray-100 lg:text-3xl text-lg font-semibold mb-2">
                   {blog?.title}
                 </h1>

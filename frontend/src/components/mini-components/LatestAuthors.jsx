@@ -16,7 +16,7 @@ export const LatestAuthors = () => {
   return (
     <div className='w-full'>
       <h1 className="text-2xl font-bold text-gray-100 mb-6 w-full flex justify-start">Authors</h1>
-      <div className='flex md:flex-row flex-col'>
+      <div className='flex lg:flex-row flex-col'>
       {
         allAuthors && allAuthors.length > 0 && allAuthors?.map((author)=>(
           <div key={author._id} className='w-full flex flex-col sm:gap-4 gap-1 mb-4 items-center'>
