@@ -15,7 +15,7 @@ import blogRouter from "./routes/blog.js"
 
 const PORT = process.env.PORT || 4000
 app.use(cors({
-    origin : [""],
+    origin : "*",
     credentials : true 
 }));
 app.use(fileUpload({
