@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import { login } from "../services/operations/user";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { FaEye , FaEyeSlash } from "react-icons/fa";
 
 export const Login = () => {
+  const [visible,setVisible] = useState(false)
   const [input, setInput] = useState({
     email: "",
     password: "",
@@ -35,13 +37,23 @@ export const Login = () => {
           className="rounded-md w-full bg-gray-800 outline-none border-b-2 border-gray-600 text-gray-200 p-2 transition duration-300 focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
           placeholder="Enter Your Email..."
         />
+        <div className="relative">
         <input
           onChange={(e) => setInput({ ...input, password: e.target.value })}
-          type="password"
+          type={visible ? "text" : "password"}
           value={input.password}
           className="rounded-md w-full bg-gray-800 outline-none border-b-2 border-gray-600 text-gray-200 p-2 transition duration-300 focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
           placeholder="Enter Your Password..."
         />
+
+        {
+          visible && <FaEye className="absolute top-2.5 right-4 text-white text-xl cursor-pointer" onClick={()=>setVisible(false)}/>
+        }
+        {
+          !visible && <FaEyeSlash className="absolute top-2.5 right-4 text-white text-xl cursor-pointer" onClick={()=>setVisible(true)}/>
+        }
+        </div>
+        
         <select
           onChange={(e) => setInput({ ...input, role: e.target.value })}
           className="rounded-md w-full bg-gray-800 outline-none border-b-2 border-gray-600 text-gray-200 p-2 transition duration-300 focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"

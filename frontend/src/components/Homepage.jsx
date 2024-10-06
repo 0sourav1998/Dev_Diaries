@@ -6,6 +6,7 @@ import { TrendingBlogs } from "./mini-components/TrendingBlogs";
 import { fetchBlogs } from "../services/operations/blogs";
 import { useDispatch } from "react-redux";
 import { setAllBlogs } from "../redux/slice/blog";
+import { Footer } from "./common/Footer";
 
 export const Homepage = () => {
   const dispatch = useDispatch();
@@ -17,11 +18,14 @@ export const Homepage = () => {
     fetchBlog();
   }, []);
   return (
-    <div className="sm:w-9/12 w-full mx-auto flex flex-col justify-between items-center">
+    <div className="sm:w-9/12 w-full flex flex-col justify-center items-center mx-auto">
       <HeroSection />
       <TrendingBlogs />
       <LatestBlogs />
       <LatestAuthors />
+      <div className="mt-6">
+      <Footer/>
+      </div>
     </div>
   );
 };

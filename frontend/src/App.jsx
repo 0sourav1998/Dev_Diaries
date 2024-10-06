@@ -14,12 +14,13 @@ import { CreateBlog } from "./components/CreateBlog";
 import { Chart } from "./components/Chart";
 import { MyProfile } from "./components/MyProfile";
 import { UpdateBlog } from "./components/UpdateBlog";
+import { Footer } from "./components/common/Footer";
 
 function App() {
   return (
-    <div className="bg-[#181a2a] overflow-x-auto h-screen w-screen">
-      <Navbar className="h-[20%]" />
-      <div className="h-[80%] p-4">
+    <div className="flex flex-col min-h-screen bg-[#181a2a]">
+      <Navbar />
+      <div className="flex-grow p-4">
         <Routes>
           <Route path="/" element={<Homepage />} />
           <Route path="/login" element={<Login />} />
@@ -31,7 +32,7 @@ function App() {
           <Route path="/dashboard" element={<MyDashboard />}>
             <Route path="myBlogs" element={<MyBlogs />} />
             <Route path="create" element={<CreateBlog />} />
-            <Route path="update/:id" element={<UpdateBlog/>}/>
+            <Route path="update/:id" element={<UpdateBlog />} />
             <Route path="chart" element={<Chart />} />
             <Route path="me" element={<MyProfile />} />
           </Route>
