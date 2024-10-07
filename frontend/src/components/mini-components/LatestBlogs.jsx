@@ -40,7 +40,7 @@ export const LatestBlogs = () => {
                   <div className="flex flex-col gap-4">
                   <div className="w-fit bg-gray-700 text-blue-500 rounded-md px-3 py-1 font-bold">{blog?.category}</div>
                     <h1 className="text-lg  font-bold text-gray-300">
-                      Title : {blog?.title}
+                      Title : {blog?.title.length > 30 ? blog.title.substring(0,30) + "..." : blog.title}
                     </h1>
                     <p className="text-xs text-gray-300 font-semibold">
                       Description : {blog.description.substring(0, 80)}...

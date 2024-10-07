@@ -14,6 +14,7 @@ const {
 export const fetchBlogs = async () => {
   let result;
   try {
+    
     const response = await apiConnector("GET", FETCH_ALL_BLOGS);
     if (response.data.success) {
       result = response.data.blogs;

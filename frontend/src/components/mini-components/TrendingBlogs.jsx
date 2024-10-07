@@ -34,7 +34,7 @@ export const TrendingBlogs = () => {
   return (
     <div className="w-full mt-6">
       <h1 className="text-2xl font-bold text-gray-100 mb-6">Trending All Of Time</h1>
-      <Carousel responsive={responsive} className="pb-4">
+      <Carousel responsive={responsive} className="pb-4 w-full">
         {allBlogs && allBlogs.length > 0 ? (
           allBlogs.slice(0, 6).map((blog) => (
             <div key={blog._id} className="flex gap-4 relative">
@@ -64,7 +64,7 @@ export const TrendingBlogs = () => {
             </div>
           ))
         ) : (
-          <BeatLoader size={30} color="gray-300"/>
+          <p>{" "}</p>
         )}
       </Carousel>
     </div>

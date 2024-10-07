@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteBlog, getMyBlogs } from "../services/operations/blogs";
 import { setMyBlogs } from "../redux/slice/blog";
@@ -6,20 +6,43 @@ import { Link } from "react-router-dom";
 import { FaRegEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import toast from "react-hot-toast";
+import { ClipLoader } from "react-spinners";
 
 export const MyBlogs = () => {
-  const { token } = useSelector((state) => state?.user);
+  const { token , user } = useSelector((state) => state?.user);
   const { myBlogs } = useSelector((state) => state?.blog);
+  const [loading,setLoading] = useState(false)
   const dispatch = useDispatch();
 
   const fetchMyBlogs = async () => {
-    const result = await getMyBlogs(token);
-    dispatch(setMyBlogs(result));
+    try {
+      setLoading(true)
+      const result = await getMyBlogs(token);
+      dispatch(setMyBlogs(result));
+    } catch (error) {
+      console.log(error.message)
+    }finally{
+      setLoading(false)
+    }
   };
 
   useEffect(() => {
     fetchMyBlogs();
-  }, [token]);
+  }, [token,user._id]);
+
+  if (loading) {
+    return (
+      <div className="text-center">
+        <ClipLoader
+          color={"green"}
+          loading={loading}
+          size={150}
+          aria-label="Loading Spinner"
+          data-testid="loader"
+        />
+      </div>
+    );
+  }
 
   const handleDelete = async (id) => {
     const result = await deleteBlog({ id: id }, token);

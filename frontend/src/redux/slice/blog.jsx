@@ -5,7 +5,8 @@ const initialState = {
   singleBlog : null ,
   myBlogs :[] ,
   latestBlogs : [] ,
-  fetchBlogById : null
+  fetchBlogById : null ,
+  loading : false,
 };
 
 const blogSlice = createSlice({
@@ -26,6 +27,9 @@ const blogSlice = createSlice({
     },
     setFetchBlogById : (state,action)=>{
       state.fetchBlogById = action.payload
+    } ,
+    setLoading : (state,action)=>{
+      state.loading = action.payload
     }
   },
 });

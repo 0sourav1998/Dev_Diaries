@@ -1,18 +1,21 @@
 import axios from "axios";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Navigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setSingleBlog } from "../redux/slice/blog";
+import { BeatLoader, ClipLoader } from "react-spinners";
 
 export const SingleBlog = () => {
   const { id } = useParams();
   const { token } = useSelector((state) => state.user);
   const { singleBlog } = useSelector((state) => state?.blog);
+  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
 
   console.log(singleBlog);
   const fetchSingleBlog = async () => {
     try {
+      setLoading(true);
       const response = await axios.get(
         `https://dev-diaries-xnjy.onrender.com/api/v1/blog/singleBlog/${id}`,
         {
@@ -26,6 +29,8 @@ export const SingleBlog = () => {
       }
     } catch (error) {
       console.log(error.message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -35,6 +40,19 @@ export const SingleBlog = () => {
 
   if (!token) {
     return <Navigate to="/" />;
+  }
+  if (loading) {
+    return (
+      <div className="text-center">
+        <ClipLoader
+          color={"green"}
+          loading={loading}
+          size={150}
+          aria-label="Loading Spinner"
+          data-testid="loader"
+        />
+      </div>
+    );
   }
 
   return (

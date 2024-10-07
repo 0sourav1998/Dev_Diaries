@@ -2,10 +2,10 @@ import React from "react";
 
 export const AboutPage = () => {
   return (
-    <div className="w-9/12 mx-auto">
+    <div className="w-11/12 mx-auto">
       <div className="flex flex-col gap-4">
         <h1 className="text-2xl font-bold text-gray-100">About</h1>
-        <p className="text-gray-400 text-sm tracking-[1px]">
+        <p className="text-gray-400 md:text-sm md:tracking-[1px] text-xs">
           Welcome to The Dev Diaries, your go-to destination for all things
           related to software development, technology trends, and the
           ever-evolving world of programming. At The Dev Diaries, we believe in
@@ -19,7 +19,7 @@ export const AboutPage = () => {
           educates, inspires, and equips you with the skills to thrive in the
           tech industry.
         </p>
-        <p className="text-gray-400 text-sm tracking-[1px]">
+        <p className="text-gray-400 md:text-sm md:tracking-[1px] text-xs">
           Our team of passionate developers and writers are dedicated to
           crafting high-quality, informative content that covers a wide range of
           topics, including web development, mobile apps, DevOps, and much more.
@@ -31,7 +31,7 @@ export const AboutPage = () => {
           human element of coding — how to balance work and life, overcome
           burnout, and find joy in the creative process of software development.
         </p>
-        <p className="text-gray-400 text-sm tracking-[1px]">
+        <p className="text-gray-400 md:text-sm md:tracking-[1px] text-xs">
           As part of our mission to create a collaborative learning space, we
           also encourage you to engage with our content, share your thoughts in
           the comments, and even contribute your own stories. We’re more than

@@ -36,7 +36,7 @@ export const HeroSection = () => {
           </Link>
         ))
       ) : (
-        <BeatLoader size={30} color="gray-300"/>
+        <p className="text-2xl font-semibold text-gray-600">No Blogs Found</p>
       )}
     </div>
   );
