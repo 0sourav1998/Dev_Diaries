@@ -26,7 +26,7 @@ export const MyBlogs = () => {
     console.log(result);
     if (result?.data?.success) {
       const updatedBlogs = myBlogs?.filter(
-        (blog) => blog?._id !== result?.data?.deleteBlog?._id
+        (blog) => blog?._id !== result?.data?.deletedBlog?._id
       );
       dispatch(setMyBlogs(updatedBlogs));
       toast.success("Blog Deleted");

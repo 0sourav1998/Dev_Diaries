@@ -10,10 +10,11 @@ export const SingleBlog = () => {
   const { singleBlog } = useSelector((state) => state?.blog);
   const dispatch = useDispatch();
 
+  console.log(singleBlog);
   const fetchSingleBlog = async () => {
     try {
       const response = await axios.get(
-        `https://dev-diaries-2.onrender.com/api/v1/blog/singleBlog/${id}`,
+        `http://localhost:4000/api/v1/blog/singleBlog/${id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -32,8 +33,8 @@ export const SingleBlog = () => {
     fetchSingleBlog();
   }, [id]);
 
-  if(!token){
-    return <Navigate to="/"/>
+  if (!token) {
+    return <Navigate to="/" />;
   }
 
   return (
@@ -47,7 +48,7 @@ export const SingleBlog = () => {
       <div className="flex flex-row gap-4 items-center mb-4">
         <img
           src={singleBlog?.authorId?.profilePicture}
-          className="h-12 w-12 rounded-full object-cover"
+          className="h-12 w-12 rounded-full object-fit"
           alt="Author"
         />
         <h1 className="text-lg font-semibold">{singleBlog?.authorId?.name}</h1>
@@ -60,7 +61,7 @@ export const SingleBlog = () => {
           <div className="flex flex-col gap-4">
             <img
               src={singleBlog?.image}
-              className="rounded-md shadow-md object-cover w-full max-h-80"
+              className="rounded-md shadow-md object-fit w-full max-h-80"
               alt="Blog"
             />
             <h1 className="text-3xl font-bold tracking-wide text-gray-100">
@@ -71,11 +72,11 @@ export const SingleBlog = () => {
         )}
 
         {/* Blog Section Two */}
-        {singleBlog?.imageTwo && (
+        {singleBlog?.imageTwo !== null && (
           <div className="flex flex-col gap-4">
             <img
               src={singleBlog?.imageTwo}
-              className="rounded-md shadow-md object-cover w-full max-h-80"
+              className="rounded-md shadow-md object-fit w-full max-h-80"
               alt="Blog"
             />
             <h1 className="text-3xl font-bold tracking-wide text-gray-100">
@@ -88,11 +89,11 @@ export const SingleBlog = () => {
         )}
 
         {/* Blog Section Three */}
-        {singleBlog?.imageThree && (
+        {singleBlog?.imageThree !== null && (
           <div className="flex flex-col gap-4">
             <img
               src={singleBlog?.imageThree}
-              className="rounded-md shadow-md object-cover w-full max-h-80"
+              className="rounded-md shadow-md object-fit w-full max-h-80"
               alt="Blog"
             />
             <h1 className="text-3xl font-bold tracking-wide text-gray-100">
@@ -105,11 +106,11 @@ export const SingleBlog = () => {
         )}
 
         {/* Blog Section Four */}
-        {singleBlog?.imageFour && (
+        {singleBlog?.imageFour !== null && (
           <div className="flex flex-col gap-4">
             <img
               src={singleBlog?.imageFour}
-              className="rounded-md shadow-md object-cover w-full max-h-80"
+              className="rounded-md shadow-md object-fit w-full max-h-80"
               alt="Blog"
             />
             <h1 className="text-3xl font-bold tracking-wide text-gray-100">

@@ -214,7 +214,7 @@ export const CreateBlog = () => {
             onChange={handleFileTwoChange}
           />
           {imagePreviewTwo && (
-            <img src={imagePreviewTwo} className="h-12 w-24" />
+            <img src={imagePreviewTwo} className="h-28 w-full" />
           )}
           <button
             onClick={() => imageTwoRef.current.click()}
@@ -250,7 +250,7 @@ export const CreateBlog = () => {
             onChange={handleFileThreeChange}
           />
           {imagePreviewThree && (
-            <img src={imagePreviewThree} className="h-12 w-24" />
+            <img src={imagePreviewThree} className="h-28 w-full" />
           )}
           <button
             onClick={() => imageThreeRef.current.click()}
@@ -284,7 +284,7 @@ export const CreateBlog = () => {
             onChange={handleFileFourChange}
           />
           {imagePreviewFour && (
-            <img src={imagePreviewFour} className="h-12 w-24" />
+            <img src={imagePreviewFour} className="h-28 w-full" />
           )}
           <button
             onClick={() => imageFourRef.current.click()}

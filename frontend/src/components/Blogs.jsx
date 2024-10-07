@@ -14,7 +14,7 @@ export const Blogs = () => {
               <div className="text-gray-100 mr-4 sm:mb-4 mb-2">
                 <div className="bg-gray-950 flex flex-col xl:flex-row sm:gap-6 gap-3 rounded-md sm:p-4 p-4 shadow-xl hover:opacity-70 cursor-pointer hover:scale-105 transition-all duration-300">
                   <img
-                    className="md:h-96 h-52 w-full xl:h-48 xl:w-40 object-fit"
+                    className="md:h-96 h-52 w-full xl:h-48 xl:w-40 object-cover"
                     src={blog?.image}
                     alt={blog.title}
                   />

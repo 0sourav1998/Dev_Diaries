@@ -5,7 +5,7 @@ export const MyProfile = () => {
   const { user } = useSelector((state) => state?.user);
 
   return (
-    <div className="w-full h-full flex items-center justify-center bg-gradient-to-b from-gray-800 to-gray-900 p-4 mr-2 sm:mr-0">
+    <div className="w-full flex items-center justify-center lg:bg-gradient-to-b from-gray-800 to-gray-900 p-4">
       <div className="bg-gray-800 rounded-xl shadow-lg flex flex-col md:flex-row justify-center items-center gap-8 md:gap-12 p-6 md:p-12 w-full max-w-4xl">
         {/* Profile Picture */}
         {user && user.profilePicture && (

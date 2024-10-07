@@ -80,7 +80,7 @@ export const UpdateBlog = () => {
   const fetchBlog = async () => {
     try {
       const response = await axios.get(
-        `https://dev-diaries-2.onrender.com/api/v1/blog/singleBlog/${id}`,
+        `http://localhost:4000/api/v1/blog/singleBlog/${id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -105,9 +105,10 @@ export const UpdateBlog = () => {
           descriptionFour: blog?.descriptionFour || "",
           imageFour: blog?.imageFour || null,
         }));
-        setImagePreviewTwo(blog?.imagePreviewTwo || logo);
-        setImagePreviewThree(blog?.imagePreviewThree || logo);
-        setImagePreviewFour(blog?.imagePreviewFour || logo);
+        setImagePreview(blog?.image)
+        setImagePreviewTwo(blog?.imageTwo || logo);
+        setImagePreviewThree(blog?.imageThree || logo);
+        setImagePreviewFour(blog?.imageFour || logo);
       }
     } catch (error) {
       console.error(error.message);
