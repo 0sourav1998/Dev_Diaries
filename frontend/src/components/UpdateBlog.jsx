@@ -79,7 +79,6 @@ export const UpdateBlog = () => {
 
   const fetchBlog = async () => {
     try {
-      console.log("ID", id);
       const response = await axios.get(
         `https://dev-diaries-2.onrender.com/api/v1/blog/singleBlog/${id}`,
         {
@@ -89,45 +88,32 @@ export const UpdateBlog = () => {
         }
       );
       if (response?.data?.success) {
-        dispatch(setFetchBlogById(response?.data?.blog));
-        setInput({
-          category: fetchBlogById?.category,
-
-          title: fetchBlogById?.title,
-          description: fetchBlogById?.description,
-          image: fetchBlogById?.image,
-
-          titleTwo: fetchBlogById.titleTwo ? fetchBlogById?.titleTwo : "",
-          descriptionTwo: fetchBlogById.descriptionTwo
-            ? fetchBlogById?.descriptionTwo
-            : "",
-          imageTwo: fetchBlogById?.imageTwo ? fetchBlogById?.imageTwo : "",
-
-          titleThree: fetchBlogById.titleThree ? fetchBlogById?.titleThree : "",
-          descriptionThree: fetchBlogById.descriptionThree
-            ? fetchBlogById?.descriptionThree
-            : "",
-          imageThree: fetchBlogById?.imageThree
-            ? fetchBlogById?.imageThree
-            : "",
-
-          titleFour: fetchBlogById.titleFour ? fetchBlogById?.titleFour : "",
-          descriptionFour: fetchBlogById.descriptionFour
-            ? fetchBlogById?.descriptionFour
-            : "",
-          imageFour: fetchBlogById?.imageFour ? fetchBlogById?.imageFour : "",
-        });
-        setImagePreview(fetchBlogById?.image);
-        fetchBlogById.imageTwo && setImagePreviewTwo(fetchBlogById?.imageTwo);
-        fetchBlogById.imageThree &&
-          setImagePreviewThree(fetchBlogById?.imageThree);
-        fetchBlogById.imageFour &&
-          setImagePreviewFour(fetchBlogById?.imageFour);
+        const blog = response?.data?.blog;
+        setInput((prevInput) => ({
+          ...prevInput,
+          category: blog?.category || "",
+          title: blog?.title || "",
+          description: blog?.description || "",
+          image: blog?.image || null,
+          titleTwo: blog?.titleTwo || "",
+          descriptionTwo: blog?.descriptionTwo || "",
+          imageTwo: blog?.imageTwo || null,
+          titleThree: blog?.titleThree || "",
+          descriptionThree: blog?.descriptionThree || "",
+          imageThree: blog?.imageThree || null,
+          titleFour: blog?.titleFour || "",
+          descriptionFour: blog?.descriptionFour || "",
+          imageFour: blog?.imageFour || null,
+        }));
+        setImagePreviewTwo(blog?.imagePreviewTwo || logo);
+        setImagePreviewThree(blog?.imagePreviewThree || logo);
+        setImagePreviewFour(blog?.imagePreviewFour || logo);
       }
     } catch (error) {
-      console.log(error.message);
+      console.error(error.message);
     }
   };
+  
 
   useEffect(() => {
     fetchBlog();
@@ -170,11 +156,11 @@ export const UpdateBlog = () => {
   };
 
   return (
-    <div className="w-full flex flex-row gap-12 mb-10">
-      <div className="w-[50%]">
+    <div className="w-full flex md:flex-row flex-col gap-12 mb-10">
+      <div className="md:w-[50%] w-full">
         <div>
           <select
-            className="bg-gray-800 text-gray-600 p-2 border-b"
+            className="bg-gray-800 text-gray-600 md:p-2 p-1 border-b"
             onChange={(e) => setInput({ ...input, category: e.target.value })}
             value={input?.category}
           >
@@ -189,7 +175,7 @@ export const UpdateBlog = () => {
           </select>
         </div>
         <div className="w-full flex flex-col gap-2 mt-4">
-          <label className="text-gray-400 text-xl">Title Of The Blog</label>
+          <label className="text-gray-400 md:text-xl text-sm">Title Of The Blog</label>
           <input
             value={input?.title}
             className="w-full p-2 bg-gray-600 text-gray-400"
@@ -197,7 +183,7 @@ export const UpdateBlog = () => {
           />
         </div>
         <div className="w-full flex flex-col gap-2 mt-4">
-          <label className="text-gray-400 text-xl">
+          <label className="text-gray-400 md:text-xl text-sm">
             Description Of The Blog
           </label>
           <textarea
@@ -223,30 +209,30 @@ export const UpdateBlog = () => {
           )}
           <button
             onClick={() => imageRef.current.click()}
-            className="w-[30%] bg-blue-600 rounded-md text-gray-300 p-3 mt-2"
+            className="w-full bg-blue-600 rounded-md text-gray-300 md:p-3 p-1  mt-2"
           >
             Choose A Image
           </button>
         </div>
         <button
           onClick={handleSubmit}
-          className="w-full bg-blue-500 text-gray-300 p-3 mt-6"
+          className="w-full bg-blue-600 rounded-md text-gray-300 md:p-3 p-1  mt-2"
         >
           {loading ? "Loading..." : "Update Blog"}
         </button>
       </div>
 
       {/* Not Mandatory Fields */}
-      <div className="w-[50%]">
+      <div className="md:w-[50%] w-full">
         {/* Image Two */}
         <div className="mb-4">
-          <label className="text-gray-400 text-lg">Title Two</label>
+          <label className="text-gray-400 md:text-xl text-sm">Title Two</label>
           <input
             value={input.titleTwo}
             onChange={(e) => setInput({ ...input, titleTwo: e.target.value })}
             className="w-full p-1 bg-gray-600 text-gray-400"
           />
-          <label className="text-gray-400 text-lg mt-2">Description Two</label>
+          <label className="text-gray-400 md:text-xl text-sm mt-2">Description Two</label>
           <textarea
             value={input.descriptionTwo}
             onChange={(e) =>
@@ -261,6 +247,7 @@ export const UpdateBlog = () => {
             ref={imageTwoRef}
             onChange={handleFileTwoChange}
           />
+          {console.log("imagePreviewTwo",imagePreviewTwo)}
           {imagePreviewTwo && (
             <img src={imagePreviewTwo} className="h-28 w-full" />
           )}
@@ -274,13 +261,13 @@ export const UpdateBlog = () => {
 
         {/* Image Three */}
         <div className="mb-4">
-          <label className="text-gray-400 text-lg">Title Three</label>
+          <label className="text-gray-400 md:text-xl text-sm">Title Three</label>
           <input
             value={input.titleThree}
             onChange={(e) => setInput({ ...input, titleThree: e.target.value })}
             className="w-full p-1 bg-gray-600 text-gray-400"
           />
-          <label className="text-gray-400 text-lg mt-2">
+          <label className="text-gray-400 md:text-xl text-sm mt-2">
             Description Three
           </label>
           <textarea
@@ -310,13 +297,13 @@ export const UpdateBlog = () => {
 
         {/* Image Four */}
         <div className="mb-4">
-          <label className="text-gray-400 text-lg">Title Four</label>
+          <label className="text-gray-400 md:text-xl text-sm">Title Four</label>
           <input
             value={input.titleFour}
             onChange={(e) => setInput({ ...input, titleFour: e.target.value })}
             className="w-full p-1 bg-gray-600 text-gray-400"
           />
-          <label className="text-gray-400 text-lg mt-2">Description Four</label>
+          <label className="text-gray-400 md:text-xl text-sm mt-2">Description Four</label>
           <textarea
             value={input.descriptionFour}
             onChange={(e) =>

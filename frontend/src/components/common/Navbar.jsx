@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setToken, setUser } from "../../redux/slice/user";
 import { RxHamburgerMenu } from "react-icons/rx";
@@ -10,6 +10,7 @@ export const Navbar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
+  const location = useLocation()
 
   const handleLogout = () => {
     dispatch(setToken(null));
@@ -17,6 +18,10 @@ export const Navbar = () => {
     toast.success("Logged Out Successfully");
     navigate("/login");
   };
+
+  useEffect(()=>{
+      setOpen(false);
+  },[location.pathname])
 
   return (
     <div className="w-full sticky top-0 z-[20] p-5 bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 shadow-2xl">

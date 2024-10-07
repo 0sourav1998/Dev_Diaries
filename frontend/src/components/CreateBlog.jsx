@@ -108,7 +108,7 @@ export const CreateBlog = () => {
     }
   };
 
-  // Reset image previews when location.pathname changes
+  
   useEffect(() => {
     setImagePreview(null);
     setImagePreviewTwo(null);
