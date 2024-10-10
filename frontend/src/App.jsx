@@ -15,6 +15,9 @@ import { Chart } from "./components/Chart";
 import { MyProfile } from "./components/MyProfile";
 import { UpdateBlog } from "./components/UpdateBlog";
 import { Footer } from "./components/common/Footer";
+import { EmailVerification } from "./components/EmailVerification";
+import { ForgotPassword } from "./components/ForgotPassword";
+import { ResetPassword } from "./components/ResetPassword";
 
 function App() {
   return (
@@ -25,6 +28,9 @@ function App() {
           <Route path="/" element={<Homepage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/verify-email" element={<EmailVerification/>}/>
+          <Route path="/forgot-password" element={<ForgotPassword/>} />
+          <Route path="/forgot-password/:token" element={<ResetPassword/>} />
           <Route path="/blogs" element={<Blogs />} />
           <Route path="/authors" element={<AllAuthors />} />
           <Route path="/about" element={<AboutPage />} />

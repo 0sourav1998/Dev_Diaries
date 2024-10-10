@@ -62,6 +62,7 @@ export const Login = () => {
           <option value="Author">Author</option>
           <option value="Reader">Reader</option>
         </select>
+        <span onClick={()=>navigate("/forgot-password")} className="text-sm text-gray-500 font-semibold cursor-pointer hover:underline transition-all duration-300">Forgot Password</span>
         <button
           onClick={handleSubmit}
           className="w-full bg-red-500 text-white p-2 rounded-md hover:bg-red-400 transition-all duration-200 shadow-lg"

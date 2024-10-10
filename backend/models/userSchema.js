@@ -31,7 +31,15 @@ const userSchema = new mongoose.Schema({
     createdOn : {
         type : Date ,
         default : ""
-    }
+    } ,
+    isVerified : {
+        type : Boolean,
+        default : false 
+    },
+    otp : String ,
+    otpExpires : Date ,
+    resetPasswordToken : String ,
+    resetPasswordExpires : Date ,
 })
 
 export const User = mongoose.model("User",userSchema)
